@@ -1,0 +1,126 @@
+﻿﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+@using System.Data
+@using ECommerce.BAL
+@model DataTable
+
+<main id="main" class="main">
+
+    <!--Heading-->
+    <div class="pagetitle">
+        
+        <h3 class="title">Admin Dashboard</h3>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="SEC_Admin" asp-controller="SEC_Admin" asp-action="SEC_AdminDashboard">Home</a></li>
+                <li class="breadcrumb-item active" >Dashboard</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <!--Heading-->
+    <!--Start DashBoard-->
+    <section class="section dashboard">
+        <div class="row">
+
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
+
+                    <!-- User -->
+                    <div class="col-xxl-4 col-md-12">
+                        <div class="card info-card sales-card">
+                            
+                                <div class="card-body">
+                                    <h5 class="card-title">Product</h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h5 class="mb-0">@Model.Rows[0]["ProductCount"]</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Cinema -->
+                    <!-- Cinema -->
+                    <div class="col-xxl-4 col-md-3">
+                        <div class="card info-card sales-card">
+                           
+                                <div class="card-body">
+                                    <h5 class="card-title">User</h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-house-door"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h5 class="mb-0">@Model.Rows[0]["UserCount"]</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Cinema -->
+                    <!-- Movie -->
+                    <div class="col-xxl-4 col-md-3">
+                        <div class="card info-card sales-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Category</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-camera-reels"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h5 class="mb-0">@Model.Rows[0]["CategoryCount"]</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End Movie -->
+                    <!-- State -->
+                    <div class="col-xxl-4 col-md-3">
+                        <div class="card info-card sales-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Order</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-geo"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h5 class="mb-0">@Model.Rows[0]["OrderCount"]</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End State -->
+                    <!-- City -->
+                </div>
+            </div><!-- End Left side columns -->
+        </div>
+    </section>
+
+    <!--Start DashBoard-->
+
+</main>
+<!-- End #main -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

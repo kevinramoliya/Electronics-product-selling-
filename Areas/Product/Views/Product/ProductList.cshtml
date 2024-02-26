@@ -1,0 +1,119 @@
+﻿﻿@{
+	ViewData["Title"] = "Product List";
+	Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+	ProductFilterModel productFilterModel = new ProductFilterModel();
+}
+
+@using System.Data
+@using ECommerce.Areas.Product.Models
+@model DataTable
+
+<main class="main" id="main">
+	<div class="body">
+
+		<div class="d-flex mt-3 mb-3">
+			<h3>Product List</h3>
+		</div>
+		
+		@*Filter Data*@
+		<form class="row my-3 p-3" style="border:1px solid black">
+			<div><h2>Filter</h2></div>
+
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<div class="col-6">
+				<select class="form-control" asp-for="@productFilterModel.CategoryID" asp-items="@(new SelectList(ViewBag.CategoryList, "CategoryID", "CategoryName"))">
+					<option value="">Select Category</option>
+				</select>
+				<span asp-validation-for="@productFilterModel.CategoryID" class="text-danger"></span>
+			</div>
+			<div class="col-6">
+				<input type="text" placeholder="Enter Product Name" asp-for="@productFilterModel.ProductName" class="form-control mt-2" id="inputAddress">
+			</div>
+			
+			<div class="col-1 my-3 me-3">
+				<button type="submit" class="btn btn-primary" asp-action="ProductFilter1" asp-controller="Product" asp-area="Product" method="POST">
+					Search
+				</button>
+			</div>
+			<div class="col-10 my-3">
+				<form>
+					<button type="submit" class="btn btn-danger" runat="server" OnClientClick="this.form.reset();return false;">Clear</button>
+				</form>
+			</div>
+		</form>
+
+		<div class="table-header d-flex">
+			<div class="add-button mr-auto">
+				<a asp-area="Product" asp-controller="Product" asp-action="ProductAdd">
+					<input type="button" class="btn btn-success" value="Add New Record" />
+				</a>
+			</div>
+			<div class="pull-right col-xl-4 ms-lg-auto">
+				<div id="sample_1_filter" class="dataTables_filter">
+					<input type="text" class="form-control input-group-sm input-small input-inline" id="sample_1" placeholder="Search" aria-controls="sample_1">
+				</div>
+			</div>
+		</div>
+		&nbsp;
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Product Name</th>
+					<th scope="col">Price</th>
+					<th scope="col">Code</th>
+					<th scope="col">Category</th>
+					@* <th scope="col">Rating</th> *@
+					<th scope="col">Actions</th>
+
+
+				</tr>
+			</thead>
+			<tbody id="sample_2">
+				@foreach (DataRow dr in Model.Rows)
+
+				{
+					<tr>
+						<td>@dr["ProductName"]</td>
+						<td>@dr["Price"]</td>
+						<td>@dr["Code"]</td>
+						<td>@dr["CategoryName"]</td>
+						@* <td>@dr["Rating"]</td> *@
+
+
+						<td>
+							<form method="post" asp-area="Product" asp-controller="Product" asp-action="ProductDelete">
+								<input type="hidden"  value="@Convert.ToInt32(dr["ProductID"])" name="ProductID" />
+								<button type="submit" class="btn btn-danger" value="Delete" onclick="return fun1()">Delete</button>
+								<a class="btn btn-info btn-xs" asp-area="Product" asp-controller="Product" asp-action="ProductAdd" asp-route-productid="@Convert.ToInt32(dr["ProductID"])">Edit</a>
+							</form>
+						</td>
+
+
+					</tr>
+				}
+
+
+			</tbody>
+		</table>
+	</div>
+</main>
+
+@section Scripts
+    {
+    <script>
+		function fun1() {
+			if (confirm("Are You Sure You Want To Delete This Record:"))
+				return true;
+			else
+				return false
+		}
+        $(document).ready(function () {
+            $("#sample_1").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#sample_2 tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}

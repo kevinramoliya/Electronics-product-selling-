@@ -1,0 +1,48 @@
+﻿
+    ﻿@{
+        ViewData["Title"] = "Product";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    @using System.Data
+    @using ECommerce.BAL
+    @model DataTable
+
+
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0">
+                    <a asp-controller="Home" asp-action="Index">Home</a> <span class="mx-2 mb-0">/</span><a asp-area="Product" asp-controller="Product" asp-action="ShoppingProductList">Shop</a> <span class="mx-2 mb-0">/</span>  <strong class="text-black">@Model.Rows[0]["ProductName"]</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="@Url.Content(Model.Rows[0]["DisplayImage"].ToString())" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-black">@Model.Rows[0]["ProductName"]</h2>
+                    <p>@Model.Rows[0]["Discription"]</p>
+                    <p><strong class="text-primary h4">@Model.Rows[0]["Price"]</strong></p>
+                    @* <div class="mb-5">
+                <div class="input-group mb-3" style="max-width: 120px;">
+                <div class="input-group-prepend">
+                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                </div>
+                <input type="text" class="form-control text-center" value="0" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <div class="input-group-append">
+                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                </div>
+                </div>
+
+                </div> *@
+                    <p><a asp-area="Cart" asp-controller="Cart" asp-action="CartInsert" asp-route-productid="@Convert.ToInt32(Model.Rows[0]["ProductID"])" asp-route-userid="@Convert.ToInt32(CommenVariable.UserID())" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+                </div>
+            </div>
+        </div>
+    </div>

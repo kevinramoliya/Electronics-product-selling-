@@ -1,0 +1,113 @@
+﻿@using ECommerce.BAL
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Electronics Product Selling Website</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!--begin::Fonts(mandatory for all pages)-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+
+	<!--end::Fonts-->
+	<link rel="stylesheet" href="~/assets1/fonts/icomoon/style.css">
+
+	<link rel="stylesheet" href="~/assets1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/assets1/css/magnific-popup.css">
+	<link rel="stylesheet" href="~/assets1/css/jquery-ui.css">
+	<link rel="stylesheet" href="~/assets1/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="~/assets1/css/owl.theme.default.min.css">
+
+
+	<link rel="stylesheet" href="~/assets1/css/aos.css">
+
+	<link rel="stylesheet" href="~/assets1/css/style.css">
+
+
+	<link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="~/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+	<script src="js/modernizr.js"></script>
+
+</head>
+<body>
+	<div class="site-wrap">
+		<header class="site-navbar" role="banner">
+			<nav class="site-navigation text-right text-md-center" role="navigation">
+				<div class="container">
+					
+					<ul class="site-menu js-clone-nav d-none d-md-block" style="margin: 0; padding: 0; list-style-type: none;">
+						<!-- Your existing navigation items -->
+						<li style="display: inline-block; margin-right: 0px;"><a asp-controller="Home" asp-action="Index">Home</a></li>
+						<li style="display: inline-block; margin-right: 20px;"><a asp-controller="Home" asp-action="product">Latest Product</a></li>
+						<li style="display: inline-block; margin-right: 20px;"><a asp-area="Product" asp-controller="Product" asp-action="ShoppingProductList">Shop</a></li>
+
+						<li style="display: inline-block; margin-right: 20px;"><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+
+						<!-- Icons -->
+					
+						<li style="display: inline-block; margin-right: 0px; margin-left:600px"><label> @CommenVariable.FirstName()</label></li>
+						<li style="display: inline-block; margin-right: 0px;">
+							<div class="dropdown">
+								<a class="dropdown-toggle" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<a asp-area="SEC_User" asp-controller="SEC_User" asp-action="SEC_UserSignIn"><span class="icon icon-person"></span></a>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="userDropdown">
+									<a class="dropdown-item">My Profile</a>
+									<a class="dropdown-item" asp-area="SEC_User" asp-controller="SEC_User" asp-action="Logout">Logout</a>
+								</div>
+							</div>
+						</li>
+						<li style="display: inline-block; margin-right: 0px;"><a href="#"><span class="icon icon-heart-o"></span></a></li>
+						<li style="display: inline-block; margin-right: 0px;">
+							<a class="site-cart" asp-area="Cart" asp-controller="Cart" asp-action="CartList" asp-route-UserID="@Convert.ToInt32(CommenVariable.UserID())">
+								<span class="icon icon-shopping_cart"></span>
+								<span class="count">@CommenVariable.CartCount()</span>
+							</a>
+						</li>
+					</ul>
+				
+
+					
+				</div>
+			</nav>
+		</header>
+	</div>
+
+	@RenderBody()
+	<div class="row pt-5 mt-5 text-center">
+		<div class="col-md-12" b-sz01n98v3g>
+			<p b-sz01n98v3g>
+				© Copyright 2023 Devloper. Design by Me in ASP.Net Core</a>
+			</p>
+		</div>
+	</div>
+
+	</div>
+	</div>
+	</footer>
+
+	<script src="~/assets1/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/assets1/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/assets1/js/site.js" asp-append-version="true"></script>
+	<script src="~/assets1/js/jquery-3.3.1.min.js"></script>
+	<script src="~/assets1/js/jquery-ui.js"></script>
+	<script src="~/assets1/js/popper.min.js"></script>
+	<script src="~/assets1/js/bootstrap.min.js"></script>
+	<script src="~/assets1/js/owl.carousel.min.js"></script>
+	<script src="~/assets1/js/jquery.magnific-popup.min.js"></script>
+	<script src="~/assets1/js/aos.js"></script>
+
+	<script src="~/assets1/js/main.js"></script>
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/plugins.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

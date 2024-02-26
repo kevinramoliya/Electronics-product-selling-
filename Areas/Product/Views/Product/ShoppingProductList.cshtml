@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Product List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ProductFilterModel productFilterModel = new ProductFilterModel();
+}
+
+@using System.Data
+@using ECommerce.Areas.Product.Models
+@model DataTable
+
+<div class="site-wrap">
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0"><a asp-action="Index" asp-controller="Home">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
+            </div>
+        </div>
+    </div>
+
+  
+        <div class="container border">
+        <form class="row" asp-action="ProductFilter" asp-controller="Product" asp-area="Product" method="POST">
+            <div><h2>Filter</h2></div>
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group col-4 mt-2">
+                <div class="">
+                    <select class="form-control" asp-for="@productFilterModel.CategoryID" asp-items="@(new SelectList(ViewBag.CategoryList, "CategoryID", "CategoryName"))">
+                        <option value="">Select Category</option>
+                    </select>
+                    <span asp-validation-for="@productFilterModel.CategoryID" class="text-danger"></span>
+                </div>
+            </div>
+           
+            <div class="col-4">
+                <input type="text" placeholder="Enter State Code" asp-for="@productFilterModel.ProductName" class="form-control mt-2" id="inputAddress">
+            </div>
+                <div class="row-1 my-3 me-6">
+            
+               
+                <button type="submit" class="btn btn-primary">
+                    Search
+                </button>
+                 <button type="submit" class="btn btn-danger" runat="server" OnClientClick="this.form.reset();return false;">Clear</button>
+                 </button>
+                   
+            </div>
+          
+        </form>
+        </div>
+    </div>
+    &nbsp;
+    <div class="container">
+        <div class="row">
+            @foreach (DataRow dataRow in Model.Rows)
+            {
+                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                    <div class="block-4 text-center border">
+                        <figure class="block-4-image">
+                            <a asp-area="Product" asp-controller="Product" asp-action="ShoppingProductByID" asp-route-productid="@Convert.ToInt32(dataRow["ProductID"])"><img src="@Url.Content(dataRow["DisplayImage"].ToString())" style="width:auto;height:250px" alt="Image placeholder" class="img-fluid"></a>
+                        </figure>
+                        <div class="block-4-text p-4">
+                            <h3><a asp-area="Product" asp-controller="Product" asp-action="ShoppingProductByID" asp-route-productid="@Convert.ToInt32(dataRow["ProductID"])">@dataRow["ProductName"]</a></h3>
+                            <a asp-area="Product" asp-controller="Product" asp-action="ShoppingProductByID" asp-route-productid="@Convert.ToInt32(dataRow["ProductID"])" class="mb-0">@dataRow["CategoryName"]</a>
+                            <p> <a asp-area="Product" asp-controller="Product" asp-action="ShoppingProductByID" asp-route-productid="@Convert.ToInt32(dataRow["ProductID"])"class="text-primary font-weight-bold">@dataRow["Price"]</a> </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+
+    </div>
+</div>
